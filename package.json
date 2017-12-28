@@ -32,7 +32,8 @@
   ],
   "dependencies": {
     "lodash": "^4.17.4",
-    "replace-with": "^1.0.0"
+    "replace-with": "^1.0.0",
+    "vuedraggable": "^2.15.0"
   },
   "devDependencies": {
     "ava": "^0.22.0",

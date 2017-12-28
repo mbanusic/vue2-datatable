@@ -1,8 +1,8 @@
 <template>
-  <tbody>
+  <draggable :element="'tbody'" :list="data">
     <template v-if="data.length">
-      <template v-for="item in data">
-        <tr>
+      <template v-for="(item,index) in data">
+        <tr :key="index">
           <td v-if="shouldRenderSelection">
             <multi-select :selection="selection" :row="item" />
           </td>
@@ -14,7 +14,6 @@
               :row="item"
               :field="col.field"
               :value="item[col.field]"
-              :nested="item.__nested__"
               v-bind="$props">
             </component>
             <template v-else>
@@ -22,19 +21,6 @@
             </template>
           </td>
         </tr>
-        <transition name="fade">
-          <tr v-if="item.__nested__ && item.__nested__.visible">
-            <td :colspan="colLen">
-              <!-- nested component -->
-              <component
-                :is="forDynCompIs(item.__nested__.comp)"
-                :row="item"
-                :nested="item.__nested__"
-                v-bind="$props">
-              </component>
-            </td>
-          </tr>
-        </transition>
       </template>
     </template>
     <tr v-else-if="!leftFixed && !rightFixed">
@@ -42,16 +28,17 @@
         ( {{ $i18nForDatatable('No Data') }} )
       </td>
     </tr>
-  </tbody>
+  </draggable>
 </template>
 <script>
 import MultiSelect from './MultiSelect.vue'
 import props from '../_mixins/props'
 import shouldRenderSelection from '../_mixins/shouldRenderSelection'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'TableBody',
-  components: { MultiSelect },
+  components: { MultiSelect, draggable },
   mixins: [props, shouldRenderSelection],
   computed: {
     colLen () {
