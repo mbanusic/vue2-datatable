@@ -1,5 +1,5 @@
 <template>
-  <draggable :element="'tbody'" :list="data">
+  <draggable :element="'tbody'" :list="data" :options="draggableO">
     <template v-if="data.length">
       <template v-for="(item,index) in data">
         <tr :key="index">
@@ -43,6 +43,12 @@ export default {
   computed: {
     colLen () {
       return this.columns.length + !!this.selection
+    },
+    draggableO() {
+        return {
+            disabled: true, //disable by default
+            ...this.draggableOptions
+        }
     }
   }
 }
