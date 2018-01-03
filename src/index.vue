@@ -8,9 +8,9 @@
     </div>
 
     <tbl v-bind="$props" />
-    
+
     <div v-if="Pagination" class="row" style="margin-top: 10px">
-      <div class="col-sm-6" style="white-space: nowrap">
+      <div v-if="showTotal" class="col-sm-6" style="white-space: nowrap">
         <strong>
           {{ $i18nForDatatable('Total') }} {{ total }} {{ $i18nForDatatable(',') }}
         </strong>
