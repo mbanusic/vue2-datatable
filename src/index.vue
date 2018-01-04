@@ -16,7 +16,7 @@
         </strong>
         <page-size-select :query="query" :page-size-options="pageSizeOptions" />
       </div>
-      <div class="col-sm-6">
+      <div :class="paginationSizeClass">
         <pagination class="pull-right" :total="total" :query="query" />
       </div>
     </div>
@@ -37,6 +37,14 @@ export default {
     // init query (make all the properties observable by using `$set`)
     const q = { limit: 10, offset: 0, sort: '', order: '', ...this.query }
     Object.keys(q).forEach(key => { this.$set(this.query, key, q[key]) })
+  },
+  computed: {
+    paginationSizeClass() {
+      if (!this.showTotal) {
+        return 'col-sm-12'
+      }
+      return 'col-sm-6'
+    }
   },
   watch: {
     data: {

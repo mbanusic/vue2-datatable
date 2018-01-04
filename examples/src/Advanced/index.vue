@@ -68,7 +68,10 @@ export default {
       // any other staff that you want to pass to dynamic components (thComp / tdComp / nested components)
       xprops: {
         eventbus: new Vue()
-      }
+      },
+        draggableOptions: {
+          disabled: false
+        }
     }
   },
   watch: {
