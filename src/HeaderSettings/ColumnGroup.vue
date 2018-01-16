@@ -51,8 +51,9 @@ export default {
 <style>
 .-col-group {
   display: inline-block;
-  width: 150px;
+  margin-bottom: 5px;
   padding: 0;
+  width: 150px;
   vertical-align: top;
 }
 .-col-group-title {
@@ -63,13 +64,14 @@ export default {
   font-size: 18px;
 }
 .-col-group > li {
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   padding-left: 10px;
   list-style: none;
   line-height: 20px;
   font-size: 12px;
 }
-.-col-group > li > input {
-  vertical-align: -2px;
+.-col-group > li > * {
+  margin: 0;
+  vertical-align: middle;
 }
 </style>

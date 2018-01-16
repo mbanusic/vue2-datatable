@@ -6,7 +6,7 @@
           <td v-if="shouldRenderSelection">
             <multi-select :selection="selection" :row="item" />
           </td>
-          <td v-for="col in columns" :class="col.tdClass" :style="col.tdStyle">
+          <td v-for="(col,index) in columns" :class="col.tdClass" :style="col.tdStyle">
             <!-- <td> component (tdComp) -->
             <component
               v-if="col.tdComp"
@@ -14,6 +14,7 @@
               :row="item"
               :field="col.field"
               :value="item[col.field]"
+              :index="index"
               v-bind="$props">
             </component>
             <template v-else>

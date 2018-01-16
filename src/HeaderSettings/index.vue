@@ -11,7 +11,7 @@
           :group-name="groupName" :columns="columns">
         </column-group>
       </div>
-      <div class="clearfix" style="margin: 10px">
+      <div class="clearfix" style="margin: 10px 0">
         <div class="btn-group btn-group-sm pull-right">
           <button class="btn btn-default" type="button" @click="apply()">
             {{ $i18nForDatatable('Apply') }}
@@ -45,16 +45,10 @@
 </template>
 <script>
 import ColumnGroup from './ColumnGroup.vue'
-import replaceWith from 'replace-with'
 import groupBy from 'lodash/groupBy'
-const LS = localStorage
-const parseStr = JSON.parse
-const stringify = JSON.stringify
-const rmFromLS = k => LS.removeItem(k)
-const saveToLS = (k, v) => LS.setItem(k, stringify(v))
-const getFromLS = k => { try { return parseStr(LS.getItem(k)) } catch (e) { rmFromLS(k) } }
-const hash = s => '' + s.split('').reduce((a, b) => (a = (a << 5) - a + b.charCodeAt(0), a & a), 0)
-// the hash algorithm above refers to http://stackoverflow.com/a/15710692/5172890
+import keyGen from '../_utils/keyGen'
+import replaceWith from '../_utils/replaceWith'
+import { parseStr, stringify, saveToLS, rmFromLS, getFromLS } from '../_utils/localstorage'
 
 export default {
   name: 'HeaderSettings',
@@ -69,7 +63,7 @@ export default {
       origSettings,
       usingBak: false, // is using backup
       processingCls: '',
-      storageKey: this.supportBackup && hash(origSettings)
+      storageKey: this.supportBackup && keyGen(origSettings)
     }
   },
   created () {
