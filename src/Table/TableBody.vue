@@ -1,12 +1,12 @@
 <template>
   <draggable :element="'tbody'" :list="data" :options="draggableO">
     <template v-if="data.length">
-      <template v-for="(item,index) in data">
+      <template v-for="(item, index) in data">
         <tr :key="index">
           <td v-if="shouldRenderSelection">
             <multi-select :selection="selection" :row="item" />
           </td>
-          <td v-for="(col,index) in columns" :class="col.tdClass" :style="col.tdStyle">
+          <td v-for="col in columns" :class="col.tdClass" :style="col.tdStyle">
             <!-- <td> component (tdComp) -->
             <component
               v-if="col.tdComp"
